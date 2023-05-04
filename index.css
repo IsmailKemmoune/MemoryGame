@@ -1,0 +1,125 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+}
+
+:root {
+  /* Color */
+  --primary: #4f4f4f;
+  --secondary: #828282;
+  --main-bg: linear-gradient(315deg, #b3cdd1 0%, #9fa4c4 74%);
+  --bg: #f2f2f2;
+  --utility: #2f80ed;
+
+  /* Font family */
+  --montserrat: "Montserrat", sans-serif;
+
+  /* Font size */
+  --xxl: 2rem;
+  --xl: 1.5rem;
+  --l: 1.2rem;
+  --m: 1rem;
+  --s: 0.9rem;
+  --xs: 0.7rem;
+
+  /* Font wight */
+  --thin: 200;
+  --regular: 400;
+  --medium: 500;
+  --bold: 700;
+
+  /* Spacing */
+  --component-spacing: 30px 0;
+
+  /* Box shadow */
+  --box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+body {
+  background: var(--main-bg);
+  font-family: var(--montserrat);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  justify-content: space-between;
+}
+
+main {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.game-board-container {
+  max-width: 800px;
+  height: 100%;
+  background-color: var(--bg);
+  border-radius: 20px;
+  width: 80%;
+  box-shadow: var(--box-shadow);
+}
+
+/* STATS */
+.stats-container {
+  text-align: right;
+  margin-bottom: 1.2em;
+}
+
+#stop {
+  font-size: 1.1em;
+  display: block;
+  margin: 1.1em auto 0 auto;
+  background-color: #000000;
+  color: #ffffff;
+}
+
+.hide {
+  display: none;
+}
+
+/* FOOTER */
+
+footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  height: 200px;
+}
+
+footer p {
+  color: var(--secondary);
+}
+
+.social-media {
+  display: flex;
+}
+
+.social-media .icon {
+  width: 35px;
+  margin: 1rem 2rem;
+  transition: filter 2s ease-in;
+}
+
+.social-media .icon .normal-filter {
+  filter: invert(29%) sepia(0%) saturate(0%) hue-rotate(216deg) brightness(94%)
+    contrast(85%);
+  transition: filter 1s ease;
+}
+
+.social-media .icon .normal-filter:hover {
+  filter: invert(0%) sepia(80%) saturate(6422%) hue-rotate(128deg)
+    brightness(105%) contrast(109%);
+}
+
+.social-media .icon img {
+  object-fit: fill;
+}
