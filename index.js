@@ -15,18 +15,18 @@ let secondCard = false;
 const items = [
   {
     name: "the-chamber-of-secrets",
-    image: ".images/the-chamber-of-secrets.jpg",
+    image: "images/the-chamber-of-secrets.jpg",
   },
-  { name: "the-complete-collection", image: ".images/the-complete-collection" },
-  { name: "the-deathly-hallows", image: ".images/the-deathly-hallows" },
-  { name: "the-goblet-of-fire", image: ".images/the-goblet-of-fire" },
-  { name: "the-half-blood-prince", image: ".images/the-half-blood-prince" },
+  { name: "the-complete-collection", image: "images/the-complete-collection" },
+  { name: "the-deathly-hallows", image: "images/the-deathly-hallows" },
+  { name: "the-goblet-of-fire", image: "images/the-goblet-of-fire" },
+  { name: "the-half-blood-prince", image: "images/the-half-blood-prince" },
   {
     name: "the-order-of-the-phoenix",
     image: ".images/the-order-of-the-phoenix",
   },
-  { name: "the-philosopher-s-stone", image: ".images/the-philosopher-s-stone" },
-  { name: "the-prisoner-of-azkaban", image: ".images/the-prisoner-of-azkaban" },
+  { name: "the-philosopher-s-stone", image: "images/the-philosopher-s-stone" },
+  { name: "the-prisoner-of-azkaban", image: "images/the-prisoner-of-azkaban" },
 ];
 
 //Initial Time
@@ -57,7 +57,7 @@ const movesCounter = () => {
 };
 
 //Pick random objects from the items array
-const generateRandom = (size = 3) => {
+const generateRandom = (size = 4) => {
   //temporary array
   let tempArray = [...items];
   //initializes cardValues array
@@ -77,6 +77,32 @@ const generateRandom = (size = 3) => {
   console.log(cardValues, "cardValues");
   return cardValues;
 };
+
+const matrixGenerator = (cardValues, size = 4) => {
+  gameContainer.innerHTML = "";
+  cardValues = [...cardValues, ...cardValues];
+  //simple shuffle
+  cardValues.sort(() => Math.random() - 0.5);
+  for (let i = 0; i < size * size; i++) {
+    /*
+          Create Cards
+          before => front side (contains question mark)
+          after => back side (contains actual image);
+          data-card-values is a custom attribute which stores the names of the cards to match later
+        */
+    gameContainer.innerHTML += `
+       <div class="card-container" data-card-value="${cardValues[i].name}">
+          <div class="card-before">?</div>
+          <div class="card-after">
+          <img src="${cardValues[i].image}" class="image"/></div>
+       </div>
+       `;
+  }
+  //Grid
+  gameContainer.style.gridTemplateColumns = `repeat(${size},auto)`;
+};
+
+matrixGenerator(generateRandom());
 
 generateRandom();
 movesCounter();

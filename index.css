@@ -10,11 +10,10 @@ html {
 
 :root {
   /* Color */
-  --primary: #4f4f4f;
+  --primary: #9fa4c4;
   --secondary: #828282;
   --main-bg: linear-gradient(315deg, #b3cdd1 0%, #9fa4c4 74%);
   --bg: #f2f2f2;
-  --utility: #2f80ed;
 
   /* Font family */
   --montserrat: "Montserrat", sans-serif;
@@ -32,9 +31,6 @@ html {
   --regular: 400;
   --medium: 500;
   --bold: 700;
-
-  /* Spacing */
-  --component-spacing: 30px 0;
 
   /* Box shadow */
   --box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
@@ -58,6 +54,7 @@ main {
   justify-content: center;
 }
 
+/* GAME BOARD */
 .game-board-container {
   max-width: 800px;
   height: 100%;
@@ -65,12 +62,53 @@ main {
   border-radius: 20px;
   width: 80%;
   box-shadow: var(--box-shadow);
+  padding: 10px;
+}
+
+.game-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  gap: 0.6em;
+}
+
+/* GAME CARD */
+.card-container {
+  position: relative;
+  width: inherit;
+  height: inherit;
+  cursor: pointer;
+}
+
+.card-before,
+.card-after {
+  position: absolute;
+  border-radius: 5px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 4px solid #000000;
+  transition: transform 0.7s ease-out;
+  backface-visibility: hidden;
+}
+
+.card-before {
+  background-color: var(--primary);
+  font-size: 2.8em;
+  font-weight: 600;
 }
 
 /* STATS */
 .stats-container {
   text-align: right;
   margin-bottom: 1.2em;
+}
+
+.stats-container span {
+  font-weight: 600;
 }
 
 #stop {
