@@ -4,7 +4,7 @@ This is a web-based implementation of the classic Memory card game, where player
 
 ## Demo
 
-- Live Site URL: [Live site URL](https://harry-potter-portfolio-two.vercel.app/)
+- Live Site URL: [Live site URL](https://memory-game-chi-seven.vercel.app/)
 
 ## Technologies Used
 
