@@ -17,16 +17,25 @@ const items = [
     name: "the-chamber-of-secrets",
     image: "images/the-chamber-of-secrets.jpg",
   },
-  { name: "the-complete-collection", image: "images/the-complete-collection" },
-  { name: "the-deathly-hallows", image: "images/the-deathly-hallows" },
-  { name: "the-goblet-of-fire", image: "images/the-goblet-of-fire" },
-  { name: "the-half-blood-prince", image: "images/the-half-blood-prince" },
   {
-    name: "the-order-of-the-phoenix",
-    image: ".images/the-order-of-the-phoenix",
+    name: "the-complete-collection",
+    image: "images/the-complete-collection.jpg",
   },
-  { name: "the-philosopher-s-stone", image: "images/the-philosopher-s-stone" },
-  { name: "the-prisoner-of-azkaban", image: "images/the-prisoner-of-azkaban" },
+  { name: "the-deathly-hallows", image: "images/the-deathly-hallows.jpg" },
+  { name: "the-goblet-of-fire", image: "images/the-goblet-of-fire.jpg" },
+  { name: "the-half-blood-prince", image: "images/the-half-blood-prince.jpg" },
+  {
+    name: "the-order-of-the-phoenix.jpg",
+    image: "images/the-order-of-the-phoenix.jpg",
+  },
+  {
+    name: "the-philosopher-s-stone",
+    image: "images/the-philosopher-s-stone.jpg",
+  },
+  {
+    name: "the-prisoner-of-azkaban",
+    image: "images/the-prisoner-of-azkaban.jpg",
+  },
 ];
 
 //Initial Time
@@ -94,16 +103,100 @@ const matrixGenerator = (cardValues, size = 4) => {
        <div class="card-container" data-card-value="${cardValues[i].name}">
           <div class="card-before">?</div>
           <div class="card-after">
-          <img src="${cardValues[i].image}" class="image"/></div>
+            <img src="${cardValues[i].image}" class="image"/>
+          </div>
        </div>
        `;
   }
   //Grid
   gameContainer.style.gridTemplateColumns = `repeat(${size},auto)`;
+  //Cards
+  cards = document.querySelectorAll(".card-container");
+  cards.forEach((card) => {
+    card.addEventListener("click", () => {
+      //If selected card is not matched yet then only run (i.e already matched card when clicked would be ignored)
+      if (!card.classList.contains("matched")) {
+        //flip the cliked card
+        card.classList.add("flipped");
+        //if it is the firstcard (!firstCard since firstCard is initially false)
+        if (!firstCard) {
+          //so current card will become firstCard
+          firstCard = card;
+          //current cards value becomes firstCardValue
+          firstCardValue = card.getAttribute("data-card-value");
+        } else {
+          //increment moves since user selected second card
+          movesCounter();
+          //secondCard and value
+          secondCard = card;
+          let secondCardValue = card.getAttribute("data-card-value");
+          if (firstCardValue == secondCardValue) {
+            //if both cards match add matched class so these cards would beignored next time
+            firstCard.classList.add("matched");
+            secondCard.classList.add("matched");
+            //set firstCard to false since next card would be first now
+            firstCard = false;
+            //winCount increment as user found a correct match
+            winCount += 1;
+            //check if winCount ==half of cardValues
+            if (winCount == Math.floor(cardValues.length / 2)) {
+              result.innerHTML = `<h2>You Won</h2>
+              <h4>Moves: ${movesCount}</h4>`;
+              stopGame();
+            }
+          } else {
+            //if the cards dont match
+            //flip the cards back to normal
+            let [tempFirst, tempSecond] = [firstCard, secondCard];
+            firstCard = false;
+            secondCard = false;
+            let delay = setTimeout(() => {
+              tempFirst.classList.remove("flipped");
+              tempSecond.classList.remove("flipped");
+            }, 900);
+          }
+        }
+      }
+    });
+  });
 };
 
-matrixGenerator(generateRandom());
+// matrixGenerator(generateRandom());
 
-generateRandom();
-movesCounter();
-timeGenerator();
+// generateRandom();
+// movesCounter();
+// timeGenerator();
+
+//Start game
+startButton.addEventListener("click", () => {
+  movesCount = 0;
+  seconds = 0;
+  minutes = 0;
+  //controls amd buttons visibility
+  controls.classList.add("hide");
+  stopButton.classList.remove("hide");
+  startButton.classList.add("hide");
+  //Start timer
+  interval = setInterval(timeGenerator, 1000);
+  //initial moves
+  moves.innerHTML = `<span>Moves:</span> ${movesCount}`;
+  initializer();
+});
+//Stop game
+stopButton.addEventListener(
+  "click",
+  (stopGame = () => {
+    controls.classList.remove("hide");
+    stopButton.classList.add("hide");
+    startButton.classList.remove("hide");
+    clearInterval(interval);
+  })
+);
+//Initialize values and func calls
+const initializer = () => {
+  result.innerText = "";
+  winCount = 0;
+  let cardValues = generateRandom();
+  console.log(cardValues);
+  matrixGenerator(cardValues);
+};

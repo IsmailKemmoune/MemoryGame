@@ -6,25 +6,18 @@
 
 html {
   font-size: 16px;
+  height: 100%;
 }
 
 :root {
   /* Color */
   --primary: #9fa4c4;
-  --secondary: #828282;
+  --secondary: #b3cdd1;
   --main-bg: linear-gradient(315deg, #b3cdd1 0%, #9fa4c4 74%);
   --bg: #f2f2f2;
 
   /* Font family */
   --montserrat: "Montserrat", sans-serif;
-
-  /* Font size */
-  --xxl: 2rem;
-  --xl: 1.5rem;
-  --l: 1.2rem;
-  --m: 1rem;
-  --s: 0.9rem;
-  --xs: 0.7rem;
 
   /* Font wight */
   --thin: 200;
@@ -42,6 +35,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   height: 100vh;
   justify-content: space-between;
 }
@@ -50,6 +44,7 @@ main {
   height: 100%;
   width: 100%;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
 }
@@ -57,20 +52,19 @@ main {
 /* GAME BOARD */
 .game-board-container {
   max-width: 800px;
-  height: 100%;
+  height: 90%;
   background-color: var(--bg);
   border-radius: 20px;
   width: 80%;
   box-shadow: var(--box-shadow);
-  padding: 10px;
+  padding: 20px;
 }
 
 .game-container {
-  position: relative;
   width: 100%;
   height: 100%;
   display: grid;
-  gap: 0.6em;
+  gap: 10px;
 }
 
 /* GAME CARD */
@@ -84,80 +78,96 @@ main {
 .card-before,
 .card-after {
   position: absolute;
-  border-radius: 5px;
+  border-radius: 20px;
   width: 100%;
   height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 4px solid #000000;
+  border: 3px solid var(--primary);
   transition: transform 0.7s ease-out;
   backface-visibility: hidden;
 }
 
 .card-before {
-  background-color: var(--primary);
+  background: var(--main-bg);
+  color: var(--primary);
   font-size: 2.8em;
   font-weight: 600;
 }
 
+.card-after {
+  overflow: hidden;
+}
+
+.card-after .image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.card-after {
+  background-color: #ffffff;
+  transform: rotateY(180deg);
+}
+
+.card-container.flipped .card-before {
+  transform: rotateY(180deg);
+}
+.card-container.flipped .card-after {
+  transform: rotateY(0deg);
+}
+
 /* STATS */
 .stats-container {
-  text-align: right;
-  margin-bottom: 1.2em;
+  margin: 20px 0;
+  display: flex;
+  gap: 100px;
 }
 
 .stats-container span {
   font-weight: 600;
 }
 
+.controls-container {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  background: var(--main-bg);
+  top: 0;
+}
+
+button {
+  border: none;
+  border-radius: 0.3em;
+  padding: 1em 1.5em;
+  cursor: pointer;
+}
 #stop {
   font-size: 1.1em;
   display: block;
-  margin: 1.1em auto 0 auto;
+  margin: 20px 0;
   background-color: #000000;
   color: #ffffff;
 }
-
+.controls-container button {
+  font-size: 1.3em;
+  box-shadow: 0 0.6em 2em rgba(86, 66, 0, 0.2);
+}
 .hide {
   display: none;
 }
-
-/* FOOTER */
-
-footer {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  align-items: center;
-  height: 200px;
+#result {
+  text-align: center;
 }
-
-footer p {
-  color: var(--secondary);
+#result h2 {
+  font-size: 2.5em;
 }
-
-.social-media {
-  display: flex;
-}
-
-.social-media .icon {
-  width: 35px;
-  margin: 1rem 2rem;
-  transition: filter 2s ease-in;
-}
-
-.social-media .icon .normal-filter {
-  filter: invert(29%) sepia(0%) saturate(0%) hue-rotate(216deg) brightness(94%)
-    contrast(85%);
-  transition: filter 1s ease;
-}
-
-.social-media .icon .normal-filter:hover {
-  filter: invert(0%) sepia(80%) saturate(6422%) hue-rotate(128deg)
-    brightness(105%) contrast(109%);
-}
-
-.social-media .icon img {
-  object-fit: fill;
+#result h4 {
+  font-size: 1.8em;
+  margin: 0.6em 0 1em 0;
 }
