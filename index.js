@@ -150,7 +150,7 @@ const matrixGenerator = (cardValues, size = 4) => {
             let [tempFirst, tempSecond] = [firstCard, secondCard];
             firstCard = false;
             secondCard = false;
-            let delay = setTimeout(() => {
+            setTimeout(() => {
               tempFirst.classList.remove("flipped");
               tempSecond.classList.remove("flipped");
             }, 900);
@@ -172,7 +172,7 @@ startButton.addEventListener("click", () => {
   movesCount = 0;
   seconds = 0;
   minutes = 0;
-  //controls amd buttons visibility
+  //controls and buttons visibility
   controls.classList.add("hide");
   stopButton.classList.remove("hide");
   startButton.classList.add("hide");
